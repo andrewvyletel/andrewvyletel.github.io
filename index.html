@@ -9,10 +9,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
 
         :root {
-            --gradient: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d, #ff6b6b);
-            --neon-shadow: 0 0 10px rgba(76, 0, 255, 0.5),
-                           0 0 20px rgba(76, 0, 255, 0.3),
-                           0 0 30px rgba(76, 0, 255, 0.1);
+            --gradient: linear-gradient(45deg, #a8834f, #8b7355, #695744, #4d4033);
+            --subtle-shadow: 0 0 15px rgba(168, 131, 79, 0.2);
         }
 
         body {
@@ -22,11 +20,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #0f0f0f;
-            color: #fff;
+            background: #1a1a1a;
+            color: #e0d6cc;
             position: relative;
             overflow-x: hidden;
-            animation: backgroundPulse 15s ease infinite;
+            animation: none;
         }
 
         body::before {
@@ -36,10 +34,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(76, 0, 255, 0.1), transparent 70%);
+            background: radial-gradient(circle at 50% 50%, rgba(168, 131, 79, 0.05), transparent 80%);
             pointer-events: none;
             z-index: -1;
-            animation: glowPulse 8s ease-in-out infinite;
+            animation: none;
         }
 
         .container {
@@ -49,14 +47,14 @@
         }
 
         h1 {
-            font-size: 3.5em;
+            font-size: 3.2em;
             background: var(--gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient 8s linear infinite, floating 3s ease-in-out infinite;
-            background-size: 300% 300%;
-            text-shadow: var(--neon-shadow);
+            text-shadow: none;
+            animation: gentleFloat 4s ease-in-out infinite;
+            letter-spacing: 1px;
         }
 
         h2 {
@@ -87,53 +85,38 @@
             margin-bottom: 40px;
             padding: 20px;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(168, 131, 79, 0.1);
         }
 
         .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.05),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        .section:hover::before {
-            left: 100%;
-            transition: 0.8s;
+            display: none;
         }
 
         .section:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--neon-shadow);
+            transform: translateY(-3px);
+            box-shadow: var(--subtle-shadow);
         }
 
         a {
-            color: #4ecdc4;
+            color: #a8834f;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
-            padding: 2px 4px;
+            padding: 0 2px;
             border-radius: 4px;
         }
 
         a:hover {
-            color: #ff6b6b;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: var(--neon-shadow);
-            animation: linkPulse 1s ease infinite;
+            color: #c4a47c;
+            background: none;
+            border-bottom: 1px solid #a8834f;
+            box-shadow: none;
+            animation: none;
         }
 
         ul {
@@ -148,63 +131,28 @@
         }
 
         ul li::before {
-            content: '⚡';
-            position: absolute;
-            left: 0;
-            color: #4ecdc4;
-            transition: transform 0.3s ease;
-            animation: spin 2s linear infinite;
+            content: '›';
+            color: #a8834f;
+            animation: none;
         }
 
         ul li:hover::before {
-            transform: translateX(5px) scale(1.2);
-            animation: shake 0.5s ease infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(5px); }
-            25% { transform: translateX(7px) translateY(-2px); }
-            75% { transform: translateX(3px) translateY(2px); }
+            transform: translateX(3px);
+            animation: none;
         }
 
         hr {
             width: 70%;
             margin: 20px auto;
             border: none;
-            height: 4px;
+            height: 1px;
             background: var(--gradient);
-            background-size: 300% 300%;
-            animation: gradient 8s linear infinite;
+            opacity: 0.3;
             position: relative;
         }
 
         hr::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #fff;
-            border-radius: 50%;
-            left: 0;
-            top: -3px;
-            animation: slideAcross 3s linear infinite;
-            box-shadow: var(--neon-shadow);
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes slideAcross {
-            0% { left: 0; }
-            100% { left: 100%; }
+            display: none;
         }
 
         @media screen and (max-width: 600px) {
@@ -221,82 +169,41 @@
             }
         }
 
-        @keyframes floating {
+        @keyframes gentleFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes backgroundPulse {
-            0%, 100% { background: #0f0f0f; }
-            50% { background: #151515; }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.5); opacity: 0.2; }
-        }
-
-        @keyframes linkPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: translateY(-5px); }
         }
 
         body {
-            cursor: none;
+            cursor: default;
         }
 
         body::after {
-            content: '';
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #4ecdc4;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: 0.1s ease;
-            z-index: 9999;
-            animation: cursorPulse 2s infinite;
-        }
-
-        @keyframes cursorPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.5); }
+            display: none;
         }
 
         .particle {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0;
-            background: var(--gradient);
-            border-radius: 50%;
-            animation: particleFade 1s ease forwards;
-        }
-
-        @keyframes particleFade {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(1); opacity: 0; }
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Marshall Vylsmells Jr.</h1>
+        <h1>Andrew Vyletel</h1>
         <p style="text-align: center; margin-bottom: 30px;">
             contact me at 
-            <a href="https://x.com/mvyletel_jr" target="_blank">X</a> • 
-            <a href="mailto:marshallvyleteljr@gmail.com" target="_blank">email</a> • 
-            <a href="https://github.com/mvyleteljr" target="_blank">github</a>
+            <a href="#" target="_blank">X</a> • 
+            <a href="mailto:" target="_blank">email</a> • 
+            <a href="#" target="_blank">github</a>
         </p>
         <hr>
         <div class="section">
             <h2>About</h2>
-            <p>Amongst other things, 
-                I am a researcher, investor, musician, writer, software engineer, and a hobby mathematician.</p>
+            <p>I am a...</p>
             <ul>
-                <li>Current role: Research Analyst at <a href="https://1kx.network/" target="_blank">1kx</a></li>
-                <li>Focus Area: Blockchain Infrastructure, MEV, and AI</li>
-                <li>Education: Applied Mathematics & Computer Science from <a href="https://www.brown.edu/" target="_blank">Brown University</a></li>
+                <li>Current role: </li>
+                <li>Focus Area: </li>
+                <li>Education: </li>
             </ul>
         </div>
 
@@ -312,8 +219,7 @@
             <h2>Research</h2>
             <p>Summary of research interests and accomplishments.</p>
             <ul>
-                <li>Talk At <a href="https://devcon.org/en/" target="_blank">Devcon</a> on Trustless Interoperability: <a href="https://www.youtube.com/watch?v=-G6oOQTb5AI&ab_channel=EthereumFoundation" target="_blank">(video)</a></li>
-                <li>Talk at Sequencing Day on App-Specific Sequencing: <a href="https://www.youtube.com/watch?v=sEPuO0PCMK0&ab_channel=EspressoSystems" target="_blank">(video)</a></li>
+                <li>Incoming...</li>
             </ul>
         </div>
 
@@ -321,8 +227,7 @@
             <h2>Writing</h2>
             <p>Collection of written works and publications.</p>
             <ul>
-                <li><a href="https://1kx.network/writing/trustless-interoperability-between-rollups-landscape-constructions-and-challenges" target="_blank">Trustless Interoperability</a></li>
-                <li>Personal Blog: <a href="https://windfall.space/" target="_blank">windfall.space</a></li>
+                <li>Incoming...</li>
             </ul>
         </div>
 
@@ -338,7 +243,7 @@
             <h2>Previously...</h2>
             <p>Past experiences and achievements.</p>
             <ul>
-                <li>Lead Data Engineer at <a href="https://x.com/______jpg______" target="_blank">JPG</a></li>
+                <li>Incoming...</li>
             </ul>
         </div>
         
